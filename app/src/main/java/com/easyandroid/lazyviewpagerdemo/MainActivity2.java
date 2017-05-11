@@ -1,46 +1,42 @@
 package com.easyandroid.lazyviewpagerdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.easytools.tools.DialogUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
-    private TabLayout tab;
-    private ViewPager vp;
-
+    Button btn1, btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         Log.d("Activity", "------->" + "   " + "onCreate();");
         initView();
     }
 
     private void initView() {
-        tab = (TabLayout) findViewById(R.id.tab);
-        vp = (ViewPager) findViewById(R.id.vp);
-
-        List<Fragment> data = new ArrayList<>();
-        data.add(new Fragment_1());
-        data.add(new Fragment_2());
-        data.add(new Fragment_3());
-        data.add(new Fragment_4());
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), data);
-        vp.setAdapter(adapter);
-
-        tab.setupWithViewPager(vp);
-        for (int i = 0 ; i < adapter.getCount() ; i ++){
-            tab.getTabAt(i).setText("Tab_" + (i + 1));
-        }
+        btn1 = (Button) findViewById(R.id.btn1);
+        btn2 = (Button) findViewById(R.id.btn2);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.showDialog(MainActivity2.this, "测试的一个dialog");
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
